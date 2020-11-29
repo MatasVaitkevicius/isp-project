@@ -25,13 +25,6 @@ class RegisterController extends Controller
     use RegistersUsers;
 
     /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = RouteServiceProvider::HOME;
-
-    /**
      * Create a new controller instance.
      *
      * @return void
@@ -68,6 +61,25 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'user_role' => $data['user_role'],
         ]);
+    }
+
+    /**
+     * Override redirect after authentication
+     *
+     * @return string
+     */
+    protected function redirectPath()
+    {
+        if (auth()->user()->user_role == User::ROLE_ADMIN) {
+            return RouteServiceProvider::ADMIN;
+        } elseif (auth()->user()->user_role == User::ROLE_WORKER) {
+            return RouteServiceProvider::WORKER;
+        } elseif (auth()->user()->user_role == User::ROLE_BUYER) {
+            return RouteServiceProvider::BUYER;
+        } elseif (auth()->user()->user_role == User::ROLE_SELLER) {
+            return RouteServiceProvider::SELLER;
+        }
     }
 }

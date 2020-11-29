@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.worker')
 
 @section('content')
 <div class="container">
@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Dashboard') }}</div>
 
                 <div class="card-body">
-                    {{ __('Welcome') }}
+                    {{ __('Hello worker!') }}
                 </div>
             </div>
         </div>

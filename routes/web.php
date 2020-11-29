@@ -19,4 +19,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/workerHome', [App\Http\Controllers\WorkerController::class, 'index'])->name('workerHome');
+
+Route::get('/adminHome', [App\Http\Controllers\AdminController::class, 'index'])->name('adminHome');
+
+Route::get('/buyerHome', [App\Http\Controllers\BuyerController::class, 'index'])->name('buyerHome');
+
+Route::get('/sellerHome', [App\Http\Controllers\SellerController::class, 'index'])->name('sellerHome');
