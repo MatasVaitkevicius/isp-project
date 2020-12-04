@@ -42,5 +42,21 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('123456'),
             'user_role' => 'seller'
         ]);
+
+        DB::table('products')->insert([ //1
+            'category' => "Electronics",
+            'name' => "PC",
+            'description' => "Good pc",
+            'product_condition' => "Good",
+            'stock_count' => 5,
+            'price' => 25.54,
+            'sold_count' => 2,
+            'storage_location' => "Warehouse",
+            'origin' => "FR",
+            'manufacture_date' => "2020-09-09",
+            'warranty' => false,
+            'weight' => 25.51,
+            'is_active' => true,
+        ]);
     }
 }

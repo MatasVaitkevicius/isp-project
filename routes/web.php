@@ -19,7 +19,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/workerHome', [App\Http\Controllers\WorkerController::class, 'index'])->name('workerHome');
+Route::get('/workerHome', [App\Http\Controllers\ProductController::class, 'index'])->name('workerHome');
+Route::get('/viewProducts', [App\Http\Controllers\ProductController::class, 'viewProductsList'])->name('viewProductsList');
 
 Route::get('/adminHome', [App\Http\Controllers\AdminController::class, 'index'])->name('adminHome');
 
