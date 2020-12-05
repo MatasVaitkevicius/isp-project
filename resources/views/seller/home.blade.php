@@ -1,4 +1,4 @@
-@extends('layouts.seller')
+@extends('layouts.apply-correct-layout')
 
 @section('content')
 <div class="container">

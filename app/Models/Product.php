@@ -31,7 +31,7 @@ class Product extends Authenticatable
         'expiry_date',
         'warranty',
         'weight',
-        'is_active',
+        'is_confirmed',
     ];
 
     /**

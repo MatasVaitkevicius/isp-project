@@ -5,9 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Products List') }}</div>
+                <div class="card-header">{{ __('Sellers List') }}</div>
                 <div class="card-body">
-                    {{ __('Here you can see products for sale') }}
+                    {{ __('Here you can see sellers') }}
                 </div>
             </div>
         </div>
@@ -19,20 +19,24 @@
                     <tr>
                         <th scope="col">Nr.</th>
                         <th scope="col">Name</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Category</th>
-                        <th scope="col">View Product</th>
+                        <th scope="col">User Role</th>
+                        <th scope="col">Created At</th>
+                        <th scope="col">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($products as $product)
+                    @foreach($sellers as $seller)
                     <tr>
                         <th scope="row">{{$loop->index+1}}</th>
-                        <td>{{$product->name }}</td>
-                        <td>{{$product->price}}</td>
-                        <td>{{$product->category }}</td>
+                        <td>{{$seller->name }}</td>
+                        <td>{{$seller->user_role}}</td>
+                        <td>{{$seller->created_at }}</td>
                         <td>
-                            <button type="submit" class="btn btn-info">View product</button>
+                            <form style="display: inline;" method="post" action="{{ route('deleteSeller', $seller) }}" onclick="return confirm('Do you really want to delete seller?')">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
                         </td>
                     </tr>
                     @endforeach

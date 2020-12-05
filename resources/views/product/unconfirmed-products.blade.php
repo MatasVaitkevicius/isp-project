@@ -5,9 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Products List') }}</div>
+                <div class="card-header">{{ __('Unconfirmed Products List') }}</div>
                 <div class="card-body">
-                    {{ __('Here you can see products for sale') }}
+                    {{ __('Here you can see unconfirmed products') }}
                 </div>
             </div>
         </div>
@@ -21,7 +21,7 @@
                         <th scope="col">Name</th>
                         <th scope="col">Price</th>
                         <th scope="col">Category</th>
-                        <th scope="col">View Product</th>
+                        <th scope="col">Confirm Product</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,7 +32,7 @@
                         <td>{{$product->price}}</td>
                         <td>{{$product->category }}</td>
                         <td>
-                            <button type="submit" class="btn btn-info">View product</button>
+                            <button type="submit" class="btn btn-warning">Confirm Product</button>
                         </td>
                     </tr>
                     @endforeach

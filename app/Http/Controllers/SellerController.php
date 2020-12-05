@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class SellerController extends Controller
 {
@@ -24,5 +25,18 @@ class SellerController extends Controller
     public function index()
     {
         return view('seller.home');
+    }
+
+    public function viewSellersList()
+    {
+        $sellers = User::where('user_role', 'seller')->orderBy('created_at')->get();
+        return view('seller.sellers', compact('sellers'));
+    }
+
+    public function deleteSeller($id)
+    {
+        $user = User::find($id);
+        $user->delete();
+        return redirect()->route('viewSellersList');
     }
 }

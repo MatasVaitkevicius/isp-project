@@ -28,7 +28,7 @@ class CreateProductsTable extends Migration
             $table->date('expiry_date')->nullable();
             $table->boolean('warranty')->nullable();
             $table->double('weight')->nullable();
-            $table->boolean('is_active');
+            $table->boolean('is_confirmed');
 
             $table->timestamps();
         });

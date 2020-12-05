@@ -38,8 +38,16 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('viewProductsList') }}">{{ __('Products') }}</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('viewUnconfirmedProductsList') }}">{{ __('Unconfirmed Products') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('viewSellersList') }}">{{ __('Sellers') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('viewBuyersList') }}">{{ __('Buyers') }}</a>
+                        </li>
                     </ul>
-
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
