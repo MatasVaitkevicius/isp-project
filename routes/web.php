@@ -30,6 +30,12 @@ Route::delete('/deleteSeller/{user}', [App\Http\Controllers\SellerController::cl
 Route::get('/viewBuyers', [App\Http\Controllers\BuyerController::class, 'viewBuyersList'])->name('viewBuyersList');
 Route::delete('/deleteBuyer/{user}', [App\Http\Controllers\BuyerController::class, 'deleteBuyer'])->name('deleteBuyer');
 
+Route::get('/viewWorkers', [App\Http\Controllers\AdminController::class, 'viewWorkersList'])->name('viewWorkersList');
+Route::delete('/deleteWorker/{user}', [App\Http\Controllers\AdminController::class, 'deleteWorker'])->name('deleteWorker');
+Route::get('/createWorker', [App\Http\Controllers\AdminController::class, 'createWorker'])->name('createWorker');
+Route::post('/createWorker', [App\Http\Controllers\AdminController::class, 'createWorkerPost'])->name('createWorkerPost');
+Route::get('/viewWorkerInfo/{user}', [App\Http\Controllers\AdminController::class, 'viewWorkerInfo'])->name('viewWorkerInfo');
+Route::post('/updateWorker/{user}', [App\Http\Controllers\AdminController::class, 'updateWorker'])->name('updateWorker');
 
 Route::get('/adminHome', [App\Http\Controllers\AdminController::class, 'index'])->name('adminHome');
 
