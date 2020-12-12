@@ -42,3 +42,9 @@ Route::get('/adminHome', [App\Http\Controllers\AdminController::class, 'index'])
 Route::get('/buyerHome', [App\Http\Controllers\BuyerController::class, 'index'])->name('buyerHome');
 
 Route::get('/sellerHome', [App\Http\Controllers\SellerController::class, 'index'])->name('sellerHome');
+Route::get('/newProduct', [App\Http\Controllers\SellerController::class, 'newProduct'])->name('newProduct');
+Route::post('/newProduct', [App\Http\Controllers\SellerController::class, 'newProductPost'])->name('newProductPost');
+Route::get('/viewSellersProductsList', [App\Http\Controllers\SellerController::class, 'viewSellersProductsList'])->name('viewSellersProductsList');
+Route::delete('/deleteProduct/{product}', [App\Http\Controllers\SellerController::class, 'deleteProduct'])->name('deleteProduct');
+Route::get('/viewSellersProductInfo/{product}', [App\Http\Controllers\SellerController::class, 'viewSellersProductInfo'])->name('viewSellersProductInfo');
+Route::post('/updateProduct/{product}', [App\Http\Controllers\SellerController::class, 'updateProduct'])->name('updateProduct');
