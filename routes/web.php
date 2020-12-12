@@ -30,6 +30,9 @@ Route::delete('/deleteSeller/{user}', [App\Http\Controllers\SellerController::cl
 Route::get('/viewBuyers', [App\Http\Controllers\BuyerController::class, 'viewBuyersList'])->name('viewBuyersList');
 Route::delete('/deleteBuyer/{user}', [App\Http\Controllers\BuyerController::class, 'deleteBuyer'])->name('deleteBuyer');
 
+Route::get('/productsReport', [App\Http\Controllers\WorkerController::class, 'productsReport'])->name('productsReport');
+Route::get('/generateReport', [App\Http\Controllers\WorkerController::class, 'generateReport'])->name('generateReport');
+
 Route::get('/viewWorkers', [App\Http\Controllers\AdminController::class, 'viewWorkersList'])->name('viewWorkersList');
 Route::delete('/deleteWorker/{user}', [App\Http\Controllers\AdminController::class, 'deleteWorker'])->name('deleteWorker');
 Route::get('/createWorker', [App\Http\Controllers\AdminController::class, 'createWorker'])->name('createWorker');
