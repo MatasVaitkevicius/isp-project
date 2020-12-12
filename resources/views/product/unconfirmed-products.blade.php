@@ -32,7 +32,10 @@
                         <td>{{$product->price}}</td>
                         <td>{{$product->category }}</td>
                         <td>
-                            <button type="submit" class="btn btn-warning">Confirm Product</button>
+                            <form style="display: inline;" method="post" action="{{ route('confirmProduct', $product) }}" onclick="return confirm('Do you really want to confirm product?')">
+                                @csrf
+                                <button type="submit" class="btn btn-warning">Confirm</button>
+                            </form>
                         </td>
                     </tr>
                     @endforeach

@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
@@ -22,6 +22,7 @@ Auth::routes();
 Route::get('/workerHome', [App\Http\Controllers\WorkerController::class, 'index'])->name('workerHome');
 Route::get('/viewProducts', [App\Http\Controllers\ProductController::class, 'viewProductsList'])->name('viewProductsList');
 Route::get('/viewUnconfirmedProducts', [App\Http\Controllers\ProductController::class, 'viewUnconfirmedProductsList'])->name('viewUnconfirmedProductsList');
+Route::post('/confirmProduct/{product}', [App\Http\Controllers\ProductController::class, 'confirmProduct'])->name('confirmProduct');
 
 
 Route::get('/viewSellers', [App\Http\Controllers\SellerController::class, 'viewSellersList'])->name('viewSellersList');
