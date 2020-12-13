@@ -5,21 +5,6 @@
 
     <div class="card-body">
         <div class="container" style="margin:20px">
-        
-            
-            
-                
-                
-            <form method="get" action="{{route('viewFilteredProducts') }}">
-            <select name="by" id="by">
-                    <option value="name">Name</option>
-                    <option value="price">Price</option>
-                    <option value="category">Category</option>
-                </select>
-                <input type="text" id="value" name="value" value=""><br>
-                <button type="submit" class="btn btn-danger">Filter</button>
-            </form>
-
             <hr>
             <table class="table table-bordered">
                 <thead class="thead-dark">
@@ -28,7 +13,8 @@
                         <th scope="col">Name</th>
                         <th scope="col">Price</th>
                         <th scope="col">Category</th>
-                        <th scope="col">View Product</th>
+                        <th scope="col">Rate</th>
+                        <th scope="col">Review</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,10 +26,24 @@
                         <td>{{$product->category }}</td>
                         <td>
 
+                        <form method="get" action="">
+                            <select name="rate" id="rate">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="5">4</option>
+                                <option value="5">5</option>
+                            </select>
+                            <button type="submit" class="btn btn-danger">Rate</button>
+                        </form>
 
-                            <form style="display: inline;" method="get" action="{{ route('viewSingleProduct', $product->id ) }}">
+                        </td>
+                        <td>
 
-                                <button type="submit" class="btn btn-danger">View product</button>
+
+                            <form style="display: inline;" method="get" action="{{ route('viewWriteReview', $product->id ) }}">
+
+                                <button type="submit" class="btn btn-danger">Write a Review </button>
                             </form>
                         </td>
                     </tr>
