@@ -25,8 +25,10 @@ Route::get('/viewFilteredProducts', [App\Http\Controllers\ProductController::cla
 Route::get('/viewPurchaseHistory', [App\Http\Controllers\SellerController::class, 'viewPurchaseHistory'])->name('viewPurchaseHistory');
 
 Route::get('/viewWriteReview/{product}', [App\Http\Controllers\SellerController::class, 'viewWriteReview'])->name('viewWriteReview');
+Route::get('/leaveReview/{product}', [App\Http\Controllers\SellerController::class, 'leaveReview'])->name('leaveReview');
 
 Route::get('/viewSingeProduct/{product}', [App\Http\Controllers\ProductController::class, 'viewSingleProduct'])->name('viewSingleProduct');
+Route::get('/buyProduct/{product}', [App\Http\Controllers\ProductController::class, 'buyProduct'])->name('buyProduct');
 
 Route::get('/viewUnconfirmedProducts', [App\Http\Controllers\ProductController::class, 'viewUnconfirmedProductsList'])->name('viewUnconfirmedProductsList');
 

@@ -16,8 +16,7 @@
         <p>Manufacture date: {{$product->manufacture_date}} | ORIGIN: {{$product->origin}}</p>
         <p>Weight: {{$product->weight}}</p>
 
-        <form method="post" action="">
-        Amount: <input type="text" id="count" name="count" value="" label="">
+        <form method="get" action="{{ route('buyProduct', $product->id) }}">
             <button type="submit" class="btn btn-danger">Buy</button>
         </form>
 

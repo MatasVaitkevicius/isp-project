@@ -29,7 +29,7 @@ class CreateProductsTable extends Migration
             $table->boolean('warranty')->nullable();
             $table->double('weight')->nullable();
             $table->boolean('is_confirmed');
-
+            $table->boolean('is_bought');
             $table->timestamps();
         });
     }

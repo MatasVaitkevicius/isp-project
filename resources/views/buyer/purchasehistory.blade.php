@@ -13,7 +13,6 @@
                         <th scope="col">Name</th>
                         <th scope="col">Price</th>
                         <th scope="col">Category</th>
-                        <th scope="col">Rate</th>
                         <th scope="col">Review</th>
                     </tr>
                 </thead>
@@ -21,27 +20,13 @@
                     @foreach($products as $product)
                     <tr>
                         <th scope="row">{{$loop->index+1}}</th>
-                        <td>{{$product->name }}</td>
-                        <td>{{$product->price}}</td>
-                        <td>{{$product->category }}</td>
-                        <td>
-
-                        <form method="get" action="">
-                            <select name="rate" id="rate">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="5">4</option>
-                                <option value="5">5</option>
-                            </select>
-                            <button type="submit" class="btn btn-danger">Rate</button>
-                        </form>
-
-                        </td>
+                        <td>{{$product[0]->name }}</td>
+                        <td>{{$product[0]->price}}</td>
+                        <td>{{$product[0]->category }}</td>
                         <td>
 
 
-                            <form style="display: inline;" method="get" action="{{ route('viewWriteReview', $product->id ) }}">
+                            <form style="display: inline;" method="get" action="{{ route('viewWriteReview', $product[0]->id ) }}">
 
                                 <button type="submit" class="btn btn-danger">Write a Review </button>
                             </form>
