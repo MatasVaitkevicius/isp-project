@@ -48,6 +48,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('products')->insert([ //1
+            'user_id' => '4',
             'created_at' => '2020-09-09 17:11:11',
             'category' => "Electronics",
             'name' => "PC",
@@ -67,6 +68,7 @@ class DatabaseSeeder extends Seeder
 
         DB::table('products')->insert([ //1
             'created_at' => '2020-09-09 17:11:11',
+            'user_id' => '4',
             'category' => "Electronics",
             'name' => "PS5",
             'description' => "Good ps",

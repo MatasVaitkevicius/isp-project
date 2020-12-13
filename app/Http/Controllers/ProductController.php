@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ProductConfirmedMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use App\Models\Product;
-use App\Models\User;
+use PdfReport;
 use App\Models\Order;
+use App\Models\User;
+use Carbon\Carbon;
+
 class ProductController extends Controller
 {
     /**
@@ -64,6 +69,53 @@ class ProductController extends Controller
 
         $product->is_bought = 1;
         $product->update();
+        return redirect()->route('viewProductsList');
+    }
+
+    public function productsReport()
+    {
+        return view('product.products-report');
+    }
+    public function generateReport(Request $request)
+    {
+        $request->validate([
+            'todate' => 'date',
+            'fromdate' => 'date'
+        ]);
+        $title = 'Sales by category';
+        $meta = [
+            'For products that have been created' => $request->fromdate . ' To ' . $request->todate
+        ];
+
+        $queryBuilder = Product::select(['category', 'name', 'price', 'sold_count'])
+            ->whereBetween('created_at', [$request->fromdate, $request->todate])
+            ->orderBy('category', 'ASC');
+        $columns = [
+            'Name' => 'name',
+            'Category' => 'category',
+            'Price' => 'price',
+            'Units sold' => 'sold_count',
+            'Sales Value' => function ($result) {
+                return ($result->price * $result->sold_count);
+            }
+        ];
+
+        return PdfReport::of($title, $meta, $queryBuilder, $columns)
+            ->showTotal([
+                'Sales Value' => 'point'
+            ])
+            ->groupBy('Category')
+            ->download('report');
+    }
+
+    public function confirmProduct($productId)
+    {
+        $product = Product::find($productId);
+        $product['is_confirmed'] = true;
+        $product['confirmation_date'] = Carbon::now()->addHours(2);
+        $user = User::find($product['user_id']);
+        $product->save();
+        Mail::to($user['email'])->send(new ProductConfirmedMail());
         return redirect()->route('viewProductsList');
     }
 }
