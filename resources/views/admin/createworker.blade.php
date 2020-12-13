@@ -51,9 +51,9 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="firstname" class="col-md-4 col-form-label text-md-right">{{ __('First Name') }}</label>
+                            <label for="first_name" class="col-md-4 col-form-label text-md-right">{{ __('First Name') }}</label>
                             <div class="col-md-6">
-                                <input id="firstname" type="text" class="form-control @error('firstname') is-invalid @enderror" name="firstname" value="{{ old('firstname') }}" required autocomplete="name" autofocus>
+                                <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') }}" required autocomplete="name" autofocus>
                             </div>
                         </div>
 
@@ -77,6 +77,7 @@
                                 <select class="form-control" id="gender" name="gender">
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>
+                                    <option value="other">Other</option>
                                 </select>
                             </div>
                         </div>
@@ -106,10 +107,10 @@
                         <div class="form-group row">
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Workload (FTE)') }}</label>
                             <div class="col-md-6">
-                                <select class="form-control" id="gender" name="gender">
-                                    <option value="1">Full-time</option>
-                                    <option value="0.5">Part-time</option>
-                                    <option value="0.25">Quarter-time</option>
+                                <select class="form-control" id="workload" name="workload">
+                                    <option value="full_time">Full-time</option>
+                                    <option value="part_time">Part-time</option>
+                                    <option value="quarter_time">Quarter-time</option>
                                 </select>
                             </div>
                         </div>
