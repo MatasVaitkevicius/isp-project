@@ -52,14 +52,14 @@ class ProductController extends Controller
         ];
 
         $queryBuilder = Product::select(['category', 'name', 'price', 'sold_count'])
-                            ->whereBetween('created_at', [$request->fromdate, $request->todate])
-                            ->orderBy('category', 'ASC');
+            ->whereBetween('created_at', [$request->fromdate, $request->todate])
+            ->orderBy('category', 'ASC');
         $columns = [
             'Name' => 'name',
             'Category' => 'category',
             'Price' => 'price',
             'Units sold' => 'sold_count',
-            'Sales Value' => function($result) {
+            'Sales Value' => function ($result) {
                 return ($result->price * $result->sold_count);
             }
         ];
@@ -70,6 +70,7 @@ class ProductController extends Controller
             ])
             ->groupBy('Category')
             ->download('report');
+    }
 
     public function confirmProduct($productId)
     {
@@ -80,6 +81,5 @@ class ProductController extends Controller
         $product->save();
         Mail::to($user['email'])->send(new ProductConfirmedMail());
         return redirect()->route('viewProductsList');
-
     }
 }
