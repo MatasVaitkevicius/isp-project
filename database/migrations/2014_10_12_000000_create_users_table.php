@@ -20,6 +20,14 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('user_role', ['buyer', 'seller', 'admin', 'worker']);
+            $table->string('first_name')->nullable();
+            $table->string('surname')->nullable();
+            $table->datetime('birthday')->nullable();
+            $table->enum('gender', ['other', 'female', 'male']);
+            $table->string('phone')->nullable();
+            $table->string('work_position')->nullable();;
+            $table->double('salary')->nullable();
+            $table->enum('workload', ['full_time', 'part_time', 'quarter_time']);
             $table->rememberToken();
             $table->timestamps();
         });

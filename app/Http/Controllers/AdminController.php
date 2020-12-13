@@ -19,7 +19,7 @@ class AdminController extends Controller
     {
         $this->middleware('auth');
     }
-        /**
+    /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
@@ -45,7 +45,8 @@ class AdminController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
         ]);
-        $user = request(['name','email']);
+
+        $user = request(['name', 'email']);
         DB::table('users')->where('id', $id)->update($user);
         return redirect()->route('viewWorkersList');
     }
@@ -62,7 +63,7 @@ class AdminController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
-        $array = request(['name','email','password']);
+        $array = request(['name', 'email', 'password']);
         User::create([
             'name' => $array['name'],
             'email' => $array['email'],
@@ -78,5 +79,4 @@ class AdminController extends Controller
         $user->delete();
         return redirect()->route('viewWorkersList');
     }
-
 }

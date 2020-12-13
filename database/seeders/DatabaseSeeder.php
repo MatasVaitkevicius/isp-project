@@ -62,7 +62,7 @@ class DatabaseSeeder extends Seeder
             'manufacture_date' => "2020-09-09",
             'warranty' => false,
             'weight' => 25.51,
-            'is_confirmed' => true,
+            'is_confirmed' => false,
             'is_bought' => false,
         ]);
 

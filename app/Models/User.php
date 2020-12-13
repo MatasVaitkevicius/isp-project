@@ -27,6 +27,14 @@ class User extends Authenticatable
         'email',
         'password',
         'user_role',
+        'first_name',
+        'surname',
+        'birthday',
+        'gender',
+        'phone',
+        'work_position',
+        'salary',
+        'workload',
     ];
 
     /**
@@ -52,7 +60,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'email_verified_at', 'birthday' => 'datetime',
     ];
 
     /**
