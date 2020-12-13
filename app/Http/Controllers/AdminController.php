@@ -43,10 +43,26 @@ class AdminController extends Controller
     {
         $this->validate(request(), [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255'],
         ]);
+        
+        $worker = User::select('name', 'email')
+            ->where('id', $id)->first();
+        $user = request(['name', 'email', 'gender', 'first_name', 'surname', 'birthday', 'phone', 'work_position', 'salary', 'workload']);
+        if ($worker->name != $user['name'])
+        {
+            $this->validate(request(), [
+                'name' => ['unique:users'],
+            ]);
+        } 
+        if ($worker->email != $user['email'])
+        {
+            $this->validate(request(), [
+                'email' => ['unique:users'],
+            ]);
+        }
 
-        $user = request(['name', 'email']);
+        //end of validation sequence
         DB::table('users')->where('id', $id)->update($user);
         return redirect()->route('viewWorkersList');
     }
@@ -58,17 +74,28 @@ class AdminController extends Controller
     public function createWorkerPost()
     {
         $this->validate(request(), [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'first_name' => ['required', 'string'],
+            'surname' => ['required', 'string'],
+            'birthday' => ['date'],
         ]);
 
-        $array = request(['name', 'email', 'password']);
+        $array = request(['name', 'email', 'password', 'gender', 'first_name', 'surname', 'birthday', 'phone', 'work_position', 'salary', 'workload']);
         User::create([
             'name' => $array['name'],
             'email' => $array['email'],
             'password' => Hash::make($array['password']),
             'user_role' => 'worker',
+            'first_name' => $array['first_name'],
+            'gender' => $array['gender'],
+            'surname' => $array['surname'],
+            'birthday' => $array['birthday'],
+            'phone' => $array['phone'],
+            'work_position' => $array['work_position'],
+            'salary' => $array['salary'],
+            'worklaod' => $array['workload']
         ]);
         return redirect()->route('viewWorkersList');
     }
