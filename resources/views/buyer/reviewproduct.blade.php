@@ -6,11 +6,6 @@
     <div class="card-body">
         <div class="container" style="margin:20px">
         <h4 style="font-weight: bold;">Product Name: {{$product->name}}</h4>
-        
-        <form method="get" action="">
-            
-            <button type="submit" class="btn btn-danger">Rate</button>
-        </form>
         <form method="get" action="{{ route('leaveReview', $product->id ) }}">
         Review:<br> <textarea type="text" id="review" name="review" value="" label=""> </textarea><br>
         <select name="rate" id="rate">

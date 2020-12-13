@@ -22,10 +22,10 @@ Auth::routes();
 Route::get('/workerHome', [App\Http\Controllers\WorkerController::class, 'index'])->name('workerHome');
 Route::get('/viewProducts', [App\Http\Controllers\ProductController::class, 'viewProductsList'])->name('viewProductsList');
 Route::get('/viewFilteredProducts', [App\Http\Controllers\ProductController::class, 'viewFilteredProducts'])->name('viewFilteredProducts');
-Route::get('/viewPurchaseHistory', [App\Http\Controllers\SellerController::class, 'viewPurchaseHistory'])->name('viewPurchaseHistory');
+Route::get('/viewPurchaseHistory', [App\Http\Controllers\BuyerController::class, 'viewPurchaseHistory'])->name('viewPurchaseHistory');
 
-Route::get('/viewWriteReview/{product}', [App\Http\Controllers\SellerController::class, 'viewWriteReview'])->name('viewWriteReview');
-Route::get('/leaveReview/{product}', [App\Http\Controllers\SellerController::class, 'leaveReview'])->name('leaveReview');
+Route::get('/viewWriteReview/{product}', [App\Http\Controllers\BuyerController::class, 'viewWriteReview'])->name('viewWriteReview');
+Route::get('/leaveReview/{product}', [App\Http\Controllers\BuyerController::class, 'leaveReview'])->name('leaveReview');
 
 Route::get('/viewSingeProduct/{product}', [App\Http\Controllers\ProductController::class, 'viewSingleProduct'])->name('viewSingleProduct');
 Route::get('/buyProduct/{product}', [App\Http\Controllers\ProductController::class, 'buyProduct'])->name('buyProduct');
