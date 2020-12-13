@@ -2,9 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ProductConfirmedMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use App\Models\Product;
+
 use PdfReport;
+
+use App\Models\User;
+use Carbon\Carbon;
+
 class ProductController extends Controller
 {
     /**
@@ -28,6 +35,7 @@ class ProductController extends Controller
         $products = Product::orderBy('created_at')->where('is_confirmed', '0')->get();
         return view('product.unconfirmed-products', compact('products'));
     }
+
     public function productsReport()
     {
         return view('product.products-report');
@@ -62,5 +70,16 @@ class ProductController extends Controller
             ])
             ->groupBy('Category')
             ->download('report');
+
+    public function confirmProduct($productId)
+    {
+        $product = Product::find($productId);
+        $product['is_confirmed'] = true;
+        $product['confirmation_date'] = Carbon::now()->addHours(2);
+        $user = User::find($product['user_id']);
+        $product->save();
+        Mail::to($user['email'])->send(new ProductConfirmedMail());
+        return redirect()->route('viewProductsList');
+
     }
 }

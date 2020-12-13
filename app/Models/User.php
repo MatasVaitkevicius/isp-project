@@ -30,6 +30,13 @@ class User extends Authenticatable
     ];
 
     /**
+     * The primary key associated with the table.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'id';
+
+    /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
@@ -47,4 +54,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     *
+     *
+     * @return HasMany
+     */
+    public function userProduct()
+    {
+        return $this->hasMany(Product::class);
+    }
 }
