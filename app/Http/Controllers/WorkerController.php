@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\User;
 class WorkerController extends Controller
 {
     /**
@@ -25,4 +25,5 @@ class WorkerController extends Controller
     {
         return view('worker.home');
     }
+
 }
