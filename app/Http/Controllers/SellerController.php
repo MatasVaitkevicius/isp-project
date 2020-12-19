@@ -71,7 +71,7 @@ class SellerController extends Controller
 
     public function updateProduct($id)
     {
-        $product = request(['name']);
+        $product = request(['category','name','description','product_condition','stock_count','price','storage_location','origin','manufacture_date','expiry_date','warranty','weight']);
         DB::table('products')->where('id', $id)->update($product);
         return redirect()->route('viewSellersProductsList');
     }
