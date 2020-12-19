@@ -44,11 +44,18 @@ class ProductController extends Controller
     public function viewFilteredProducts()
     {
         $array = request(['by','value']);
-
+   
         $products = Product::orderBy('created_at')->where($array['by'], $array['value'])->where('is_confirmed', '1')->get();
-        return view('product.products', compact('products'));
+        return view('product.products', compact('products','array'));
     }
     
+    public function viewFilteredProductsAfterTwoFilters()
+    {
+        $array2 = request(['by','value','by2','value2']);
+        $products = Product::orderBy('created_at')->where($array2['by'], $array2['value'])->where($array2['by2'], $array2['value2'])->where('is_confirmed', '1')->get();
+        return view('product.products', compact('products','array2'));
+    }
+
     public function buyProduct($item_id)
     {
         $user_id = auth()->user()->id;

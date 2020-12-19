@@ -22,6 +22,7 @@ Auth::routes();
 Route::get('/workerHome', [App\Http\Controllers\WorkerController::class, 'index'])->name('workerHome');
 Route::get('/viewProducts', [App\Http\Controllers\ProductController::class, 'viewProductsList'])->name('viewProductsList');
 Route::get('/viewFilteredProducts', [App\Http\Controllers\ProductController::class, 'viewFilteredProducts'])->name('viewFilteredProducts');
+Route::get('/viewFilteredProductsAfterTwoFilters', [App\Http\Controllers\ProductController::class, 'viewFilteredProductsAfterTwoFilters'])->name('viewFilteredProductsAfterTwoFilters');
 Route::get('/viewPurchaseHistory', [App\Http\Controllers\BuyerController::class, 'viewPurchaseHistory'])->name('viewPurchaseHistory');
 
 Route::get('/viewWriteReview/{product}', [App\Http\Controllers\BuyerController::class, 'viewWriteReview'])->name('viewWriteReview');

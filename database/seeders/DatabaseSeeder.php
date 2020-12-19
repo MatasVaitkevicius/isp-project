@@ -38,6 +38,15 @@ class DatabaseSeeder extends Seeder
             'user_role' => 'buyer',
             'created_at' => '2020-09-09 17:11:11',
         ]);
+        
+        
+        DB::table('users')->insert([ //3
+            'name' => "buyer2",
+            'email' => "buyer2@gmail.com",
+            'password' => Hash::make('123456'),
+            'user_role' => 'buyer',
+            'created_at' => '2020-09-09 17:11:11',
+        ]);
 
         DB::table('users')->insert([ //4
             'name' => "seller",
@@ -62,19 +71,37 @@ class DatabaseSeeder extends Seeder
             'manufacture_date' => "2020-09-09",
             'warranty' => false,
             'weight' => 25.51,
-            'is_confirmed' => false,
+            'is_confirmed' => true,
             'is_bought' => false,
         ]);
 
         DB::table('products')->insert([ //1
             'created_at' => '2020-09-09 17:11:11',
             'user_id' => '4',
-            'category' => "Electronics",
+            'category' => "Electrodsnics",
             'name' => "PS5",
             'description' => "Good ps",
             'product_condition' => "Good",
             'stock_count' => 5,
             'price' => 25.54,
+            'sold_count' => 2,
+            'storage_location' => "Warehouse",
+            'origin' => "FR",
+            'manufacture_date' => "2020-09-09",
+            'warranty' => false,
+            'weight' => 25.51,
+            'is_confirmed' => true,
+            'is_bought' => false,
+        ]);
+        DB::table('products')->insert([ //1
+            'created_at' => '2020-09-09 17:11:11',
+            'user_id' => '4',
+            'category' => "Electronics",
+            'name' => "PS5X",
+            'description' => "Good ps",
+            'product_condition' => "Good",
+            'stock_count' => 5,
+            'price' => 253.54,
             'sold_count' => 2,
             'storage_location' => "Warehouse",
             'origin' => "FR",
