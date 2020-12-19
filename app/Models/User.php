@@ -27,7 +27,22 @@ class User extends Authenticatable
         'email',
         'password',
         'user_role',
+        'first_name',
+        'surname',
+        'birthday',
+        'gender',
+        'phone',
+        'work_position',
+        'salary',
+        'workload',
     ];
+
+    /**
+     * The primary key associated with the table.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'id';
 
     /**
      * The attributes that should be hidden for arrays.
@@ -45,6 +60,16 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'email_verified_at', 'birthday' => 'datetime',
     ];
+
+    /**
+     *
+     *
+     * @return HasMany
+     */
+    public function userProduct()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

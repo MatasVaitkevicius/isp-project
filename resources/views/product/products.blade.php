@@ -2,18 +2,25 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Products List') }}</div>
-                <div class="card-body">
-                    {{ __('Here you can see products for sale') }}
-                </div>
-            </div>
-        </div>
-    </div>
+
     <div class="card-body">
         <div class="container" style="margin:20px">
+        
+            
+            
+                
+                
+            <form method="get" action="{{route('viewFilteredProducts') }}">
+            <select name="by" id="by">
+                    <option value="name">Name</option>
+                    <option value="price">Price</option>
+                    <option value="category">Category</option>
+                </select>
+                <input type="text" id="value" name="value" value=""><br>
+                <button type="submit" class="btn btn-danger">Filter</button>
+            </form>
+
+            <hr>
             <table class="table table-bordered">
                 <thead class="thead-dark">
                     <tr>
@@ -32,7 +39,12 @@
                         <td>{{$product->price}}</td>
                         <td>{{$product->category }}</td>
                         <td>
-                            <button type="submit" class="btn btn-info">View product</button>
+
+
+                            <form style="display: inline;" method="get" action="{{ route('viewSingleProduct', $product->id ) }}">
+
+                                <button type="submit" class="btn btn-danger">View product</button>
+                            </form>
                         </td>
                     </tr>
                     @endforeach

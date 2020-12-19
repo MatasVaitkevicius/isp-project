@@ -17,6 +17,7 @@ class Product extends Authenticatable
      * @var array
      */
     protected $fillable = [
+        'user_id',
         'category',
         //created_at
         'name',
@@ -32,7 +33,15 @@ class Product extends Authenticatable
         'warranty',
         'weight',
         'is_confirmed',
+        'confirmation_date',
     ];
+
+    /**
+     * The primary key associated with the table.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'id';
 
     /**
      * The attributes that should be cast to native types.
@@ -40,6 +49,15 @@ class Product extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'manufacture_date', 'expiry_date' => 'date',
+        'manufacture_date', 'expiry_date', 'confirmation_date' => 'date',
     ];
+
+
+    /**
+     * @return HasOne
+     */
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
 }

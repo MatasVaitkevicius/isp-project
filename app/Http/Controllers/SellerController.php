@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\Product;
+use App\Models\Order;
+use App\Models\Rating;
 use DB;
 
 class SellerController extends Controller
