@@ -5,9 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Sellers List') }}</div>
+                <div class="card-header">{{ __('Cryptocurrency list') }}</div>
                 <div class="card-body">
-                    {{ __('Here you can see sellers') }}
+                    {{ __('Here you can see cryptocurrencies an their current prices.') }}
                 </div>
             </div>
         </div>
@@ -19,25 +19,15 @@
                     <tr>
                         <th scope="col">Nr.</th>
                         <th scope="col">Name</th>
-                        <th scope="col">User Role</th>
-                        <th scope="col">Created At</th>
-                        <th scope="col">Delete</th>
+                        <th scope="col">Price (EUR)</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($sellers as $seller)
+                    @foreach($dataArray as $seller)
                     <tr>
                         <th scope="row">{{$loop->index+1}}</th>
                         <td>{{$seller->name }}</td>
-                        <td>{{$seller->user_role}}</td>
-                        <td>{{$seller->created_at }}</td>
-                        <td>
-                            <form style="display: inline;" method="post" action="{{ route('deleteSeller', $seller) }}" onclick="return confirm('Do you really want to delete seller?')">
-                                @csrf
-                                @method('delete')
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
-                        </td>
+                        <td>{{$seller->quote->EUR->price }}</td>
                     </tr>
                     @endforeach
                 </tbody>
