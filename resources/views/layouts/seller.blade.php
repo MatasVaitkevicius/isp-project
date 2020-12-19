@@ -40,10 +40,7 @@
                           <a class="nav-link" href="{{ route('viewSellersProductsList') }}">{{ __('Product list') }}</a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" href="{{ route('viewProductsList') }}">{{ __('Products') }}</a>
-                      </li>
-                      <li class="nav-item">
-                          <a class="nav-link" href="{{ route('viewProductsList') }}">{{ __('Products') }}</a>
+                          <a class="nav-link" href="{{ route('viewAPI') }}">{{ __('Cryptocurrency courses') }}</a>
                       </li>
                     </ul>
 

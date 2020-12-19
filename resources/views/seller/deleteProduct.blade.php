@@ -38,7 +38,7 @@
                             </form>
                         </td>
                         <td>
-                            <form style="display: inline;" method="post" action="{{ route('viewSellersProductsList', $product) }}" onclick="return confirm('Do you really want to remove this product?')">
+                            <form style="display: inline;" method="post" action="{{ route('deleteProduct', $product) }}" onclick="return confirm('Do you really want to remove this product?')">
                                 @csrf
                                 @method('delete')
                                 <button type="submit" class="btn btn-danger">Delete</button>

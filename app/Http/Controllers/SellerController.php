@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\User;
-use App\Models\Product;
 use App\Models\Order;
 use App\Models\Rating;
+use Carbon\Carbon;
+use GuzzleHttp\Client;
 use DB;
 
 class SellerController extends Controller
@@ -36,27 +37,74 @@ class SellerController extends Controller
         return view('seller.newProduct');
     }
 
-    public function newProductPost()
+    public function viewAPI()
     {
-        $array = request(['category','name','description','product_condition','stock_count','price','storage_location','origin','manufacture_date','expiry_date','warranty','weight']);
-        Product::create([
-            'category' => $array['category'],
-            'name' => $array['name'],
-            'description' => $array['description'],
-            'product_condition' => $array['product_condition'],
-            'stock_count' => $array['stock_count'],
-            'price' => $array['price'],
-            'sold_count' => 0,
-            'storage_location' => $array['storage_location'],
-            'origin' => $array['origin'],
-            'manufacture_date' => $array['manufacture_date'],
-            'expiry_date' => $array['expiry_date'],
-            'warranty' => $array['warranty'],
-            'weight' => $array['weight'],
-            'is_confirmed' => 0,
-            'created_at' => NOW(),
-            'updated_at' => '',
-        ]);
+        $url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest';
+        $parameters = [
+          'start' => '1',
+          'limit' => '10',
+          'convert' => 'EUR'
+        ];
+
+        $headers = [
+          'Accepts: application/json',
+          'X-CMC_PRO_API_KEY: cbd70184-ff75-4459-bbcf-d0f587f1dc7e'
+        ];
+        $qs = http_build_query($parameters); // query string encode the parameters
+        $request = "{$url}?{$qs}"; // create the request URL
+
+
+        $curl = curl_init(); // Get cURL resource
+        // Set cURL options
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => $request,            // set the request URL
+          CURLOPT_HTTPHEADER => $headers,     // set the headers
+          CURLOPT_RETURNTRANSFER => 1         // ask for raw response instead of bool
+        ));
+
+        $response = curl_exec($curl); // Send the request, save the response
+        $data = json_decode($response);
+        $dataArray = $data->data;
+        //dd($data->data); // print json decoded response
+        //print_r($response);
+        curl_close($curl); // Close request
+        //print_r(json_decode($response));
+
+        //return view('seller.viewAPI');
+        return view('seller.viewAPI', compact('dataArray'));
+
+    }
+
+    //cbd70184-ff75-4459-bbcf-d0f587f1dc7e
+
+    public function newProductPost(Request $request)
+    {
+      // $this->validate(request(), [
+      //     'name' => ['numeric'],
+      //     'email' => ['numeric'],
+      // ]);
+
+        $product = new Product();
+        $product->user_id = auth()->user()->id;
+        $product->category = $request->get('category');
+        $product->name = $request->get('name');
+        $product->description = $request->get('description');
+        $product->product_condition = $request->get('product_condition');
+        $product->stock_count = $request->get('stock_count');
+        $product->price = $request->get('price');
+        $product->sold_count = 0;
+        $product->is_bought = 0;
+        $product->manufacture_date = $request->get('manufacture_date');
+        $product->storage_location = $request->get('storage_location');
+        $product->origin = $request->get('origin');
+        $product->expiry_date = $request->get('expiry_date');
+        $product->warranty = $request->get('warranty');
+        $product->weight = $request->get('weight');
+        $product->is_confirmed = 0;
+        $product->created_at = Carbon::parse($product->created_at)->addHours(2);
+        $product->save();
+        //dd($product);
+
         return redirect()->route('newProduct');
     }
 
@@ -83,7 +131,7 @@ class SellerController extends Controller
     {
         $product = Product::find($id);
         $product->delete();
-        return redirect()->route('viewProductsList');
+        return redirect()->route('viewSellersProductsList');
     }
 
     public function viewSellersList()

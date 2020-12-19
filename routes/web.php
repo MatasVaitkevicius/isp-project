@@ -61,3 +61,4 @@ Route::get('/viewSellersProductsList', [App\Http\Controllers\SellerController::c
 Route::delete('/deleteProduct/{product}', [App\Http\Controllers\SellerController::class, 'deleteProduct'])->name('deleteProduct');
 Route::get('/viewSellersProductInfo/{product}', [App\Http\Controllers\SellerController::class, 'viewSellersProductInfo'])->name('viewSellersProductInfo');
 Route::post('/updateProduct/{product}', [App\Http\Controllers\SellerController::class, 'updateProduct'])->name('updateProduct');
+Route::get('/viewAPI', [App\Http\Controllers\SellerController::class, 'viewAPI'])->name('viewAPI');
