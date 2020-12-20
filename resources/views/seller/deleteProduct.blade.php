@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">{{ __('Products list') }}</div>
                 <div class="card-body">
-                    {{ __('Here you can see products') }}
+                    {{ __('Here you can see your products.') }}
                 </div>
             </div>
         </div>

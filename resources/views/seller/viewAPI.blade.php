@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">{{ __('Cryptocurrency list') }}</div>
                 <div class="card-body">
-                    {{ __('Here you can see cryptocurrencies an their current prices.') }}
+                    {{ __('Here you can see cryptocurrencies and their current prices.') }}
                 </div>
             </div>
         </div>

@@ -48,7 +48,7 @@
                             <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
 
                             <div class="col-md-6">
-                                <textarea id="description" type="text-area" class="form-control @error('description') is-invalid @enderror" name="description" value="{{ $product->description }}" required autocomplete="description"></textarea>
+                                <input id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" value="{{ $product->description }}" required autocomplete="description"></input>
 
                                 @error('description')
                                 <span class="invalid-feedback" role="alert">
@@ -62,7 +62,7 @@
                             <label for="product_condition" class="col-md-4 col-form-label text-md-right">{{ __('Condition') }}</label>
 
                             <div class="col-md-6">
-                                <textarea id="product_condition" type="text" class="form-control @error('product_condition') is-invalid @enderror" name="product_condition" value="{{ $product->product_condition }}" required autocomplete="product_condition" autofocus></textarea>
+                                <input id="product_condition" type="text" class="form-control @error('product_condition') is-invalid @enderror" name="product_condition" value="{{ $product->product_condition }}" required autocomplete="product_condition" autofocus></input>
 
                                 @error('product_condition')
                                 <span class="invalid-feedback" role="alert">
@@ -76,7 +76,7 @@
                             <label for="stock_count" class="col-md-4 col-form-label text-md-right">{{ __('Number in stock') }}</label>
 
                             <div class="col-md-6">
-                                <input id="stock_count" type="number" class="form-control @error('stock_count') is-invalid @enderror" name="stock_count" value="{{ $product->stock_count }}" required autocomplete="stock_count" autofocus>
+                                <input id="stock_count" type="number" min="1" class="form-control @error('stock_count') is-invalid @enderror" name="stock_count" value="{{ $product->stock_count }}" required autocomplete="stock_count" autofocus>
 
                                 @error('stock_count')
                                 <span class="invalid-feedback" role="alert">
@@ -90,7 +90,7 @@
                             <label for="price" class="col-md-4 col-form-label text-md-right">{{ __('Price') }}</label>
 
                             <div class="col-md-6">
-                                <input id="price" type="number" step="0.01" placeholder="ex. 19.99" class="form-control @error('price') is-invalid @enderror" name="price" value="{{ $product->price }}" required autocomplete="price" autofocus>
+                                <input id="price" type="number" step="0.01" min="0.01" placeholder="ex. 19.99" class="form-control @error('price') is-invalid @enderror" name="price" value="{{ $product->price }}" required autocomplete="price" autofocus>
 
                                 @error('price')
                                 <span class="invalid-feedback" role="alert">
@@ -159,7 +159,10 @@
                             <label for="warranty" class="col-md-4 col-form-label text-md-right">{{ __('Warranty') }}</label>
 
                             <div class="col-md-6">
-                                <input id="warranty" type="text" class="form-control @error('warranty') is-invalid @enderror" name="warranty" value="{{ $product->warranty }}" required autocomplete="warranty" autofocus>
+                              <select class="form-control" name="warranty" id="warranty">
+                                <option value=0>No</option>
+                                <option value=1>Yes</option>
+                              </select>
 
                                 @error('warranty')
                                 <span class="invalid-feedback" role="alert">
