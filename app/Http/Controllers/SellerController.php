@@ -79,10 +79,10 @@ class SellerController extends Controller
 
     public function newProductPost(Request $request)
     {
-      // $this->validate(request(), [
-      //     'name' => ['numeric'],
-      //     'email' => ['numeric'],
-      // ]);
+      $this->validate(request(), [
+          'stock_count' => 'numeric|min:1',
+          'price' => 'numeric|min:0.01',
+      ]);
 
         $product = new Product();
         $product->user_id = auth()->user()->id;
@@ -105,7 +105,7 @@ class SellerController extends Controller
         $product->save();
         //dd($product);
 
-        return redirect()->route('newProduct');
+        return redirect()->route('viewSellersProductsList');
     }
 
     public function viewSellersProductsList()
