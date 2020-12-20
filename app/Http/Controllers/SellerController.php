@@ -41,14 +41,14 @@ class SellerController extends Controller
     {
         $url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest';
         $parameters = [
-          'start' => '1',
-          'limit' => '10',
-          'convert' => 'EUR'
+            'start' => '1',
+            'limit' => '10',
+            'convert' => 'EUR'
         ];
 
         $headers = [
-          'Accepts: application/json',
-          'X-CMC_PRO_API_KEY: cbd70184-ff75-4459-bbcf-d0f587f1dc7e'
+            'Accepts: application/json',
+            'X-CMC_PRO_API_KEY: cbd70184-ff75-4459-bbcf-d0f587f1dc7e'
         ];
         $qs = http_build_query($parameters); // query string encode the parameters
         $request = "{$url}?{$qs}"; // create the request URL
@@ -57,9 +57,9 @@ class SellerController extends Controller
         $curl = curl_init(); // Get cURL resource
         // Set cURL options
         curl_setopt_array($curl, array(
-          CURLOPT_URL => $request,            // set the request URL
-          CURLOPT_HTTPHEADER => $headers,     // set the headers
-          CURLOPT_RETURNTRANSFER => 1         // ask for raw response instead of bool
+            CURLOPT_URL => $request,            // set the request URL
+            CURLOPT_HTTPHEADER => $headers,     // set the headers
+            CURLOPT_RETURNTRANSFER => 1         // ask for raw response instead of bool
         ));
 
         $response = curl_exec($curl); // Send the request, save the response
@@ -72,17 +72,16 @@ class SellerController extends Controller
 
         //return view('seller.viewAPI');
         return view('seller.viewAPI', compact('dataArray'));
-
     }
 
     //cbd70184-ff75-4459-bbcf-d0f587f1dc7e
 
     public function newProductPost(Request $request)
     {
-      // $this->validate(request(), [
-      //     'name' => ['numeric'],
-      //     'email' => ['numeric'],
-      // ]);
+        // $this->validate(request(), [
+        //     'name' => ['numeric'],
+        //     'email' => ['numeric'],
+        // ]);
 
         $product = new Product();
         $product->user_id = auth()->user()->id;
@@ -103,15 +102,15 @@ class SellerController extends Controller
         $product->is_confirmed = 0;
         $product->created_at = Carbon::parse($product->created_at)->addHours(2);
         $product->save();
-        //dd($product);
 
-        return redirect()->route('newProduct');
+        return redirect()->route('viewSellersProductsList');
     }
 
     public function viewSellersProductsList()
     {
-      $products = Product::orderBy('created_at')->get();
-      return view('seller.deleteProduct', compact('products'));
+        $userId = auth()->user()->id;
+        $products = Product::where('user_id', $userId)->where('is_bought', '0')->get();
+        return view('seller.deleteProduct', compact('products'));
     }
 
     public function viewSellersProductInfo($id)
@@ -122,7 +121,7 @@ class SellerController extends Controller
 
     public function updateProduct($id)
     {
-        $product = request(['category','name','description','product_condition','stock_count','price','storage_location','origin','manufacture_date','expiry_date','warranty','weight']);
+        $product = request(['category', 'name', 'description', 'product_condition', 'stock_count', 'price', 'storage_location', 'origin', 'manufacture_date', 'expiry_date', 'warranty', 'weight']);
         DB::table('products')->where('id', $id)->update($product);
         return redirect()->route('viewSellersProductsList');
     }
@@ -142,6 +141,7 @@ class SellerController extends Controller
 
     public function deleteSeller($id)
     {
+        $product = Product::where('user_id', $id)->delete();
         $user = User::find($id);
         $user->delete();
         return redirect()->route('viewSellersList');

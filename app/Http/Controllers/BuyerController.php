@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Product;
 use App\Models\Order;
 use App\Models\Rating;
+
 class BuyerController extends Controller
 {
     /**
@@ -37,6 +38,8 @@ class BuyerController extends Controller
 
     public function deleteBuyer($id)
     {
+        $rating = Rating::where('user_id', $id)->delete();
+        $order = Order::where('user_id', $id)->delete();
         $user = User::find($id);
         $user->delete();
         return redirect()->route('viewBuyersList');
@@ -52,13 +55,13 @@ class BuyerController extends Controller
         $orders = Order::orderBy('purchase_date')->where('user_id', $user_id)->get();
         $products = array();
         foreach ($orders as $order) {
-            
+
             $product = Product::orderBy('created_at')->where('id', $order->item_id)->get();
-            
-            array_push($products,$product);
+
+            array_push($products, $product);
         }
 
-        
+
 
         return view('buyer.purchasehistory', compact('products'));
     }
@@ -74,7 +77,7 @@ class BuyerController extends Controller
         $product = Product::find($id);
         $user_id = auth()->user()->id;
         $rating = new Rating();
-        $array = request(['review','rate']);
+        $array = request(['review', 'rate']);
         $rating->date =  date("Y/m/d");
         $rating->review =  $array['review'];
         $rating->rating = $array['rate'];
@@ -89,13 +92,13 @@ class BuyerController extends Controller
         $orders = Order::orderBy('purchase_date')->where('user_id', $user_id)->get();
         $products = array();
         foreach ($orders as $order) {
-            
+
             $product = Product::orderBy('created_at')->where('id', $order->item_id)->get();
-            
-            array_push($products,$product);
+
+            array_push($products, $product);
         }
 
-        
+
 
         return view('buyer.purchasehistory', compact('products'));
     }
@@ -106,4 +109,3 @@ class BuyerController extends Controller
         return redirect()->route('b');
     }
 }
-
