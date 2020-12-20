@@ -32,7 +32,7 @@
                         <td>{{$product->price}}</td>
                         <td>{{$product->category }}</td>
                         <td>
-                            <form style="display: inline;" method="post" action="{{ route('confirmProduct', $product) }}" onclick="return confirm('Do you really want to confirm product?')">
+                            <form style="display: inline;" method="post" action="{{ route('confirmProduct', $product) }}">
                                 @csrf
                                 <button type="submit" class="btn btn-warning">Confirm</button>
                             </form>

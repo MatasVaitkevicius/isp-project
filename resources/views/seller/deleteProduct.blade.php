@@ -20,8 +20,8 @@
                         <th scope="col">Nr.</th>
                         <th scope="col">Name</th>
                         <th scope="col">Confirmed</th>
-                        <th scope="col">Delete</th>
                         <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
